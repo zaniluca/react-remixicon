@@ -1,4 +1,4 @@
 dist
-test.tsx
 node_modules
 build
+./test.tsx
