@@ -1,5 +1,3 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import multi from "@rollup/plugin-multi-entry";
 import terser from "@rollup/plugin-terser";
 import ts from "rollup-plugin-ts";
@@ -22,8 +20,6 @@ export default [
       multi({
         entryFileName: "index.js",
       }), // Allows multiple entry points https://www.npmjs.com/package/@rollup/plugin-multi-entry
-      commonjs(),
-      resolve(),
       ts(), // Transpiles TypeScript https://www.npmjs.com/package/rollup-plugin-ts
     ],
     external: ["react"],
