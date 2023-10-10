@@ -1,7 +1,7 @@
 {
-  "name": "remixicon-svgr",
-  "version": "0.0.1",
-  "author": "Luca Zani",
+  "name": "react-remixicon",
+  "version": "3.5.0",
+  "author": "Luca Zani <zani.luca@icloud.com>",
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./build && svgr --config-file=./svgr.config.js ./node_modules/remixicon/icons",
