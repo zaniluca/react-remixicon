@@ -1,8 +1,15 @@
 {
   "name": "react-remixicon",
-  "version": "3.5.0",
+  "version": "0.0.0",
   "author": "Luca Zani <zani.luca@icloud.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zaniluca/react-remixicon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zaniluca/react-remixicon/issues"
+  },
   "scripts": {
     "build": "rimraf ./build && svgr --config-file=./svgr.config.js ./node_modules/remixicon/icons",
     "rollup": "rimraf ./dist && rollup -c"
@@ -29,5 +36,13 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "remixicon",
+    "icons",
+    "jsx",
+    "react-components",
+    "components"
+  ]
 }
