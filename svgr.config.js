@@ -6,6 +6,9 @@ module.exports = {
   memo: true,
   index: true,
   outDir: "build",
+  svgProps: {
+    fill: "currentColor",
+  },
   indexTemplate: (filePaths) => {
     const exportEntries = filePaths.map(({ path: filePath }) => {
       const basename = path.basename(filePath, path.extname(filePath));
