@@ -16,7 +16,7 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      // terser(), // Minifies generated bundles https://www.npmjs.com/package/rollup-plugin-terser
+      terser(), // Minifies generated bundles https://www.npmjs.com/package/rollup-plugin-terser
       multi({
         entryFileName: "index.js",
         preserveModules: true,
