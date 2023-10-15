@@ -3,8 +3,9 @@ import path from "path";
 export default {
   icon: true,
   typescript: true,
-  // memo: true,
+  memo: true,
   index: true,
+  ref: true,
   outDir: "build",
   svgProps: {
     fill: "currentColor",
