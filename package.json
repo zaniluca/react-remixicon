@@ -1,6 +1,6 @@
 {
   "name": "@zaniluca/react-remixicon",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.7",
   "private": false,
   "author": "Luca Zani <zani.luca@icloud.com>",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "url": "https://github.com/zaniluca/react-remixicon/issues"
   },
   "scripts": {
-    "build": "rimraf ./build ./dist && svgr --config-file=./svgr.config.js ./node_modules/remixicon/icons && node ./scripts/buildIndex.mjs && tsup",
+    "build": "rimraf ./build ./dist && svgr --config-file=./svgr.config.mjs ./node_modules/remixicon/icons && node ./scripts/buildIndex.mjs && tsup",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
@@ -28,8 +28,7 @@
   "peerDependencies": {
     "react": "^18.2.0"
   },
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
