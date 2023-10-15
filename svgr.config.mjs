@@ -1,9 +1,9 @@
-const path = require("path");
+import path from "path";
 
-module.exports = {
+export default {
   icon: true,
   typescript: true,
-  memo: true,
+  // memo: true,
   index: true,
   outDir: "build",
   svgProps: {
