@@ -3,9 +3,10 @@ import path from "path";
 export default {
   icon: true,
   typescript: true,
-  memo: true,
+  // For some reason having memo or ref enabled leads to non-tree-shakeable components
+  // memo: true,
+  // ref: true,
   index: true,
-  ref: true,
   outDir: "build",
   svgProps: {
     fill: "currentColor",

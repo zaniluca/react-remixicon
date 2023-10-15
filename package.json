@@ -1,6 +1,6 @@
 {
   "name": "@zaniluca/react-remixicon",
-  "version": "0.0.1-alpha.9",
+  "version": "0.0.1-alpha.11",
   "private": false,
   "author": "Luca Zani <zani.luca@icloud.com>",
   "license": "MIT",
@@ -30,6 +30,7 @@
   },
   "type": "module",
   "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
   "files": [
     "dist"
   ],
