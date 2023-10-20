@@ -1,6 +1,6 @@
 # @zaniluca/react-remixicon [![Remix Icons version](https://img.shields.io/badge/remixicon-v3.5.0-blue.svg?style=flat-square)](https://remixicon.com/)
 
-[Remixicon](https://remixicon.com/) packaged as **tree-shakable** react components.
+[Remixicon](https://remixicon.com/) packaged as tree-shakable react components.
 
 ## Installation
 
