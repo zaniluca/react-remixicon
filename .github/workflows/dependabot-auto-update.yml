@@ -61,7 +61,7 @@ jobs:
       # For major updates, we want to manually review the PR before merging
       - name: "Label Dependabot PRs with major updates"
         if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-major'
-        run: gh pr edit --add-label "major"
+        run: gh pr edit --add-label "dependencies-major"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
