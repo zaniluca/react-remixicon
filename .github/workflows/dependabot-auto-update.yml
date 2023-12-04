@@ -31,7 +31,6 @@ jobs:
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
         with:
-          tag-prefix: "v"
           commit-message: "chore: bumped version to {{version}} [skip ci]"
           version-type: ${{ steps.metadata.outputs.update-type == 'version-update:semver-major' && 'major' || 'minor' }}
         env:
