@@ -1,0 +1,67 @@
+name: "Dependabot Auto Update"
+
+on:
+  pull_request:
+    branches:
+      - "master"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump-version:
+    if: github.actor == 'dependabot[bot]'
+    name: Bump Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Print old package.json
+        run: cat ./package.json
+
+      - name: "Retrive Dependabot Metadata"
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Automated Version Bump
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          commit-message: "chore: bumped version to {{version}}"
+          version-type: ${{ steps.metadata.outputs.update-type == 'version-update:semver-major' && 'major' || 'minor' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print new package.json
+        run: cat ./package.json
+
+  merge-pr:
+    if: github.actor == 'dependabot[bot]'
+    needs: bump-version
+    name: "Merge Pull Request"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Retrive Dependabot Metadata"
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: "Enable auto-merge for Dependabot PRs with minor updates"
+        if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      # For major updates, we want to manually review the PR before merging
+      - name: "Label Dependabot PRs with major updates"
+        if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: gh pr edit --add-label "dependencies-major"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
