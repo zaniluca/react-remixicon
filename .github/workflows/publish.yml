@@ -7,8 +7,6 @@ on:
 
 jobs:
   publish:
-    # Only publish on master branch
-    if: endsWith(github.ref, 'master')
     name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
@@ -49,11 +47,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract Tag
+        id: extract_tag
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${{ github.ref }}" \
+          gh release create "${{ steps.extract_tag.outputs.tag }}" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="@zaniluca/react-remixicon@${{ github.ref }}" \
+              --title="@zaniluca/react-remixicon@${{ steps.extract_tag.outputs.tag }}" \
               --generate-notes
