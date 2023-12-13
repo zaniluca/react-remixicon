@@ -1,6 +1,6 @@
 {
   "name": "@zaniluca/react-remixicon",
-  "version": "1.2.0",
+  "version": "1.2.1-alpha.0",
   "private": false,
   "author": "Luca Zani <zani.luca@icloud.com>",
   "license": "MIT",
@@ -15,11 +15,12 @@
   "scripts": {
     "clean": "rimraf ./build ./dist",
     "build": "yarn clean && svgr --config-file=./svgr.config.mjs ./node_modules/remixicon/icons && node ./scripts/buildIndex.mjs && yarn rollup",
-    "rollup": "rollup -c",
+    "rollup": "rollup -c --configPlugin typescript",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@svgr/cli": "^8.1.0",
     "@types/react": "^18.2.27",
     "react": "^18.2.0",
@@ -27,7 +28,6 @@
     "rimraf": "^5.0.5",
     "rollup": "^4.5.1",
     "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-ts": "^3.4.5",
     "typescript": "^5.2.2"
   },

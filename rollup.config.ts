@@ -1,6 +1,5 @@
 import terser from "@rollup/plugin-terser";
 import ts from "rollup-plugin-ts";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { dts } from "rollup-plugin-dts";
 import { defineConfig } from "rollup";
 
@@ -15,7 +14,8 @@ export default defineConfig([
         format: "es",
       },
     ],
-    plugins: [terser(), peerDepsExternal(), ts()],
+    plugins: [terser(), ts()],
+    external: ["react"],
   },
   {
     input: "build/index.ts",

@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "typeRoots": []
   },
-  "include": ["build"],
+  "include": ["build", "rollup.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
