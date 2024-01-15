@@ -5,15 +5,13 @@ on:
     branches:
       - "master"
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   bump-version:
     if: github.actor == 'dependabot[bot]'
     name: Bump Version
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit the updated package.json
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -44,6 +42,9 @@ jobs:
     needs: bump-version
     name: "Merge Pull Request"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to merge the PR
+      pull-requests: write # Needed to add labels to the PR
     steps:
       - name: "Retrive Dependabot Metadata"
         id: metadata
