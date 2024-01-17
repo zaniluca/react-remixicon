@@ -6,6 +6,9 @@ on:
       - "*"
   workflow_dispatch:
 
+permissions:
+  contents: write # Needed to create release
+
 jobs:
   publish:
     name: Publish to NPM
@@ -52,6 +55,10 @@ jobs:
         id: extract_tag
         run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
 
+      - name: Extract Previous Tag
+        id: extract_previous_tag
+        run: echo "previous_tag=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1  --max-count=1`)" >> $GITHUB_OUTPUT
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,4 +66,4 @@ jobs:
           gh release create "${{ steps.extract_tag.outputs.tag }}" \
               --repo="$GITHUB_REPOSITORY" \
               --title="@zaniluca/react-remixicon@${{ steps.extract_tag.outputs.tag }}" \
-              --generate-notes
+              --notes="**Full Changelog**: https://github.com/zaniluca/react-remixicon/compare/${{ steps.extract_previous_tag.outputs.previous_tag}}...${{ steps.extract_tag.outputs.tag }}"
