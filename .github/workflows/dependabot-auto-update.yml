@@ -41,6 +41,12 @@ jobs:
     name: "Enable Dependabot Automerge"
     runs-on: ubuntu-latest
     steps:
+      - name: "Retrive Dependabot Metadata"
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
       - name: Enable automerge on dependabot PRs
         if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
         uses: daneden/enable-automerge-action@v1
