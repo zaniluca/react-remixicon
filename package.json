@@ -20,7 +20,7 @@
     "@svgr/cli": "^8.1.0",
     "@types/react": "^18.2.27",
     "react": "^18.2.0",
-    "remixicon": "^4.1.0",
+    "remixicon": "^4.2.0",
     "rimraf": "^5.0.5",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
