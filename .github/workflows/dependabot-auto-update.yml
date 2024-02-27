@@ -1,9 +1,7 @@
 name: "Dependabot Auto Update"
 
 on:
-  pull_request:
-    branches:
-      - "master"
+  pull_request_target:
 
 jobs:
   bump-version:
@@ -52,7 +50,16 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: "Enable auto-merge for Dependabot PRs with minor updates"
+      - name: Enable automerge on dependabot PRs
+        if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        uses: daneden/enable-automerge-action@v1
+        with:
+          # The reason why you can’t use the standard GITHUB_TOKEN env variable is that
+          # this workflow requires a specific user with write access on the repository to act on behalf of.
+          github-token: ${{ secrets.DEPENDABOT_PERSONAL_ACCESS_TOKEN }}
+          allowed-author: "dependabot[bot]"
+
+      - name: "Merge for Dependabot PRs with minor updates"
         if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
         run: gh pr merge --auto --merge "$PR_URL"
         env:
