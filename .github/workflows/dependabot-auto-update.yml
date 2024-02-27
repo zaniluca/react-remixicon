@@ -35,9 +35,24 @@ jobs:
       - name: Print new package.json
         run: cat ./package.json
 
-  merge-pr:
+  enable-auto-merge:
     if: github.actor == 'dependabot[bot]'
     needs: bump-version
+    name: "Enable Dependabot Automerge"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable automerge on dependabot PRs
+        if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        uses: daneden/enable-automerge-action@v1
+        with:
+          # The reason why you can’t use the standard GITHUB_TOKEN env variable is that
+          # this workflow requires a specific user with write access on the repository to act on behalf of.
+          github-token: ${{ secrets.DEPENDABOT_PERSONAL_ACCESS_TOKEN }}
+          allowed-author: "dependabot[bot]"
+
+  merge-pr:
+    if: github.actor == 'dependabot[bot]'
+    needs: ["bump-version", "enable-auto-merge"]
     name: "Merge Pull Request"
     runs-on: ubuntu-latest
     permissions:
@@ -49,15 +64,6 @@ jobs:
         uses: dependabot/fetch-metadata@v1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Enable automerge on dependabot PRs
-        if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
-        uses: daneden/enable-automerge-action@v1
-        with:
-          # The reason why you can’t use the standard GITHUB_TOKEN env variable is that
-          # this workflow requires a specific user with write access on the repository to act on behalf of.
-          github-token: ${{ secrets.DEPENDABOT_PERSONAL_ACCESS_TOKEN }}
-          allowed-author: "dependabot[bot]"
 
       - name: "Merge for Dependabot PRs with minor updates"
         if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
