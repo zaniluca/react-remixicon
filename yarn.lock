@@ -1425,10 +1425,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-remixicon@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/remixicon/-/remixicon-4.8.0.tgz#52d16cc63f8557140ed39d5cb9c6403bccdddb68"
-  integrity sha512-8qTM/bWkmsAWitvcL9XrVPVdqHRrdmnNp4zCFBdmIHBygxfHWwoK6NzitbiMyRzjcXKBMlS/ab5M65/ZlxJTVA==
+remixicon@^4.9.1:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/remixicon/-/remixicon-4.9.1.tgz#9b3193ac7c1aa290822f9976692d4b45028128d3"
+  integrity sha512-36gLSoujkabnCFZFDyP17VNh9piuBA/rsXUb4auSJWLGsHVXtmxLj/EM5FjaEAGnk8oIAj1Azob/DZ2N+90lAQ==
 
 resolve-from@^4.0.0:
   version "4.0.0"
