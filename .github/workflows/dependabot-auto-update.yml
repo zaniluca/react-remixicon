@@ -49,7 +49,7 @@ jobs:
 
       - name: Enable automerge on dependabot PRs
         if: contains(steps.metadata.outputs.dependency-names, 'remixicon') && steps.metadata.outputs.update-type == 'version-update:semver-minor'
-        uses: daneden/enable-automerge-action@v1
+        uses: daneden/enable-automerge-action@master
         with:
           # The reason why you can’t use the standard GITHUB_TOKEN env variable is that
           # this workflow requires a specific user with write access on the repository to act on behalf of.
